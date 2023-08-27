@@ -1,0 +1,215 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* font-family: 'Pacifico', cursive; */
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f3f3f3;
+}
+
+.figure-container {
+  max-width: 300px;
+  padding: 10px;
+  border-radius: 30px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.caption {
+  font-weight: bold;
+  height: 25px;
+  overflow: hidden;
+  margin: 5px;
+  color: white;
+  padding: 7px;
+  font-size: 20px;
+  background-color: rgb(43, 90, 131);
+  border-radius: 20px;
+}
+.artist {
+  display: block;
+  position: relative;
+  padding: 7px 20px;
+  text-align: left;
+  font-size: 18px;
+  margin: 2px;
+  border-bottom: 2px solid rgb(43, 90, 131);
+}
+.fa-microphone-lines {
+  margin-right: 20px;
+}
+.artist_name {
+  font-size: 15px;
+}
+
+.audio-player {
+  width: 300px;
+}
+
+.download-link {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.message {
+  display: flex;
+  padding: 5px;
+}
+.current_song_no {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  top: -5px;
+  padding: 10px 20px;
+  color: black;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 15px;
+}
+.status {
+  position: relative;
+  width: 50%;
+  margin: 0px 10px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  background-color: rgb(240, 240, 240);
+  text-align: center;
+  opacity: 0.4;
+  transition: opacity 0.3s ease-in-out;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+#music-icon {
+  position: relative;
+  font-size: 33px;
+  border-radius: 10px;
+  right: 0;
+  padding: 2px 0px;
+  color: rgb(24, 62, 95);
+}
+.btn-group {
+  margin: 5px;
+}
+
+.fa-caret-left,
+.fa-caret-right {
+  font-size: 26px;
+  padding: 0px 10px;
+  cursor: pointer;
+  color: #909090;
+  transition: color 0.3s;
+}
+
+.fa-caret-left:hover,
+.fa-caret-right:hover {
+  color: rgb(24, 62, 95);
+}
+
+#openAddSongModalBtn {
+  position: relative;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+}
+#addSongModal,
+#songListModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+/* for modal to add music */
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  width: 100%;
+  max-width: 300px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.modal-content h3 {
+  background-color: rgb(24, 62, 95);
+  color: white;
+  width: 100%;
+  border-radius: 20px;
+  margin: 10px auto;
+  padding: 5px 0px;
+}
+
+#addMusicForm input[type='text'],
+#addMusicForm input[type='file'] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+#addMusicForm button[type='submit'] {
+  background-color: rgb(24, 62, 95);
+  color: #fff;
+  padding: 10px 50px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#addMusicForm button[type='submit']:hover {
+  background-color: rgb(8, 33, 55);
+}
+
+#closeAddSongModal,
+#closeSongListModal {
+  float: right;
+  margin: 17px auto;
+  margin-right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+}
+
+#songList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+#songList li {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+#songList li:hover {
+  background-color: #e9e9e9;
+  cursor: pointer;
+}

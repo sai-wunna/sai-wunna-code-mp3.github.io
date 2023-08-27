@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <title>MP3 Player</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <figure class="figure-container">
+        <figcaption class="caption"></figcaption>
+        <div class="artist">
+          <i class="fa-solid fa-microphone-lines"></i>
+          <span class="artist_name"></span>
+        </div>
+        <div class="btn-group">
+          <i class="fa-solid fa-caret-left" id="prev_song"></i>
+          <div class="current_song_no"></div>
+          <!-- song list modal end -->
+          <div id="songListModal">
+            <div class="modal-content">
+              <span id="closeSongListModal">&times;</span>
+              <h3>Songs List</h3>
+              <ul id="songList"></ul>
+            </div>
+          </div>
+          <!-- song list modal end -->
+          <i class="fa-solid fa-caret-right" id="next_song"></i>
+        </div>
+        <audio class="audio-player" id="audio-player" controls src="">
+          <!-- <a class="download-link" href=""></a> -->
+        </audio>
+        <div class="message">
+          <i class="fas fa-compact-disc" id="music-icon"></i>
+          <div id="status" class="status">Frozen Heart !</div>
+          <i class="fa-solid fa-plus" id="openAddSongModalBtn"></i>
+        </div>
+        <!-- // add song model start -->
+        <div id="addSongModal">
+          <div class="modal-content">
+            <span id="closeAddSongModal">&times;</span>
+            <h3>Add Music</h3>
+            <form id="addMusicForm">
+              <label for="caption">Caption:</label>
+              <input type="text" id="caption" name="caption" required />
+              <br />
+              <label for="artist">Artist:</label>
+              <input type="text" id="artist" name="artist" required />
+              <br />
+              <label for="audioFile">Audio File:</label>
+              <input
+                type="file"
+                id="audioFile"
+                name="audioFile"
+                accept=".mp3"
+                required />
+              <br />
+              <button type="submit">Add</button>
+            </form>
+          </div>
+        </div>
+        <!-- // add song modal end  -->
+      </figure>
+      <script type="module" src="./script.js"></script>
+    </div>
+  </body>
+</html>
