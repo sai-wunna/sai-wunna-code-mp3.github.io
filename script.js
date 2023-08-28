@@ -48,34 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
     currentSongNumber(currentSong)
   }
   start()
-  // songList modal start
-  const songListModal = document.querySelector('#songListModal')
-  const closeSongListModal = document.querySelector('#closeSongListModal')
-  const songList = document.querySelector('#songList')
-
-  songList.addEventListener('click', (e) => {
-    currentSong = parseInt(e.target.id)
-    songListModal.style.display = 'none'
-    songList.innerHTML = ''
-    start()
-  })
-  current_song_no.addEventListener('click', () => {
-    songListModal.style.display = 'block'
-    for (let i = 0; i < songs.length; i++) {
-      songList.innerHTML += `<li id=${i}>
-        ${songs[
-          i
-        ].caption.toUpperCase()} <h6><i class="fa-solid fa-microphone-lines"></i>${songs[
-        i
-      ].artist.toUpperCase()}</h6>
-      </li>`
-    }
-  })
-  closeSongListModal.addEventListener('click', () => {
-    songListModal.style.display = 'none'
-    songList.innerHTML = ''
-  })
-  // songList modal start
 
   function musicPlay() {
     status.style.opacity = '1'
@@ -187,4 +159,35 @@ document.addEventListener('DOMContentLoaded', function () {
     start()
   })
   // to add music with modal and form end
+   // songList modal start
+  const songListModal = document.querySelector('#songListModal')
+  const closeSongListModal = document.querySelector('#closeSongListModal')
+  const songList = document.querySelector('#songList')
+
+  songList.addEventListener('click', (e) => {
+    currentSong = parseInt(e.target.id)
+    songListModal.style.display = 'none'
+    songList.innerHTML = ''
+    start()
+    if(playing){
+      audioPlayer.play();
+    }
+  })
+  current_song_no.addEventListener('click', () => {
+    songListModal.style.display = 'block'
+    for (let i = 0; i < songs.length; i++) {
+      songList.innerHTML += `<li id=${i}>
+        ${songs[
+          i
+        ].caption.toUpperCase()} <h6><i class="fa-solid fa-microphone-lines"></i>${songs[
+        i
+      ].artist.toUpperCase()}</h6>
+      </li>`
+    }
+  })
+  closeSongListModal.addEventListener('click', () => {
+    songListModal.style.display = 'none'
+    songList.innerHTML = ''
+  })
+  // songList modal start
 })
