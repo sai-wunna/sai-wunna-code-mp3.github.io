@@ -146,7 +146,7 @@
   width: 100%;
   max-width: 300px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+  border-radius: 20px;
 }
 
 .modal-content h3 {
@@ -188,7 +188,7 @@
   float: right;
   margin: 17px auto;
   margin-right: 10px;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   cursor: pointer;
   color: white;
@@ -204,6 +204,7 @@
 #songList li {
   margin-bottom: 10px;
   padding: 5px;
+  padding-left: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
