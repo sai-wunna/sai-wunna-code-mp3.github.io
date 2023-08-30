@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
     artist_name.textContent = songs[currentSong].artist.toUpperCase()
     currentSongNumber(currentSong)
     volume_of_song_percentage.textContent = volume_of_song.value + ' %'
+    time_left_of_song.value = 0
   }
   start()
 
@@ -87,10 +88,12 @@ document.addEventListener('DOMContentLoaded', function () {
     audioPlayer.currentTime = seekTime
   })
   audioPlayer.addEventListener('timeupdate', () => {
-    const currentTime = audioPlayer.currentTime
-    const duration = audioPlayer.duration
-    const percentage = (currentTime / duration) * 100
-    time_left_of_song.value = percentage
+    if (playing) {
+      const currentTime = audioPlayer.currentTime
+      const duration = audioPlayer.duration
+      const percentage = (currentTime / duration) * 100
+      time_left_of_song.value = percentage
+    }
   })
 
   // manipulate what to do when play or pause or end
