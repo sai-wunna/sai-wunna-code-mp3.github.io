@@ -11,8 +11,8 @@
   </head>
   <body>
     <div class="wrapper">
-      <figure class="figure-container">
-        <figcaption class="caption"></figcaption>
+      <div class="figure-container">
+        <div class="caption"></div>
         <div class="artist">
           <i class="fa-solid fa-microphone-lines"></i>
           <span class="artist_name"></span>
@@ -20,7 +20,7 @@
         <div class="btn-group">
           <i class="fa-solid fa-caret-left" id="prev_song"></i>
           <div class="current_song_no"></div>
-          <!-- song list modal end -->
+          <!-- song list modal start -->
           <div id="songListModal">
             <div class="modal-content">
               <span id="closeSongListModal">&times;</span>
@@ -31,9 +31,18 @@
           <!-- song list modal end -->
           <i class="fa-solid fa-caret-right" id="next_song"></i>
         </div>
-        <audio class="audio-player" id="audio-player" controls src="">
+        <audio class="audio-player" id="audio-player" src="">
           <!-- <a class="download-link" href=""></a> -->
         </audio>
+        <div class="audio-condition">
+          <div class="audio-condition-box">
+            <input type="range" id="time_left_of_song" min="0" max="100" step="1" value="0"/>
+          </div>
+          <div class="audio-condition-box">
+            <input type="range" id="volume_of_song"/>
+            <span id="volume_of_song_percentage"></span><i class="fa-solid fa-volume-high" id="volume_icon"></i>
+          </div>
+        </div>
         <div class="message">
           <i class="fas fa-compact-disc" id="music-icon"></i>
           <div id="status" class="status">Frozen Heart !</div>
@@ -64,8 +73,9 @@
           </div>
         </div>
         <!-- // add song modal end  -->
-      </figure>
+      </d>
       <script type="module" src="./script.js"></script>
     </div>
   </body>
 </html>
+
