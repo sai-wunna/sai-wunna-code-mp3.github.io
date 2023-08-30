@@ -70,10 +70,10 @@ document.addEventListener('DOMContentLoaded', function () {
   volume_of_song.addEventListener('input', () => {
     audioPlayer.volume = volume_of_song.value / 100
     volume_of_song_percentage.textContent = volume_of_song.value + ' %'
-    if (volume_of_song.value === '0') {
+    if (parseInt(volume_of_song.value) === 0) {
       volume_icon.setAttribute('class', '')
       volume_icon.classList.add('fa-solid', 'fa-volume-xmark')
-    } else if (volume_of_song.value < '50') {
+    } else if (parseInt(volume_of_song.value) < 50) {
       volume_icon.setAttribute('class', '')
       volume_icon.classList.add('fa-solid', 'fa-volume-low')
     } else {
