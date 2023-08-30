@@ -37,18 +37,63 @@ document.addEventListener('DOMContentLoaded', function () {
   const artist_name = document.querySelector('.artist_name')
   const caption = document.querySelector('.caption')
   const current_song_no = document.querySelector('.current_song_no')
+  const volume_of_song = document.querySelector('#volume_of_song')
+  const time_left_of_song = document.querySelector('#time_left_of_song')
+  const volume_of_song_percentage = document.querySelector(
+    '#volume_of_song_percentage'
+  )
+  const volume_icon = document.querySelector('#volume_icon')
 
   function currentSongNumber(number) {
     current_song_no.textContent = `${++number} / ${songs.length}`
   }
   function start() {
+    audioPlayer.volume = 0.5
     audioPlayer.src = songs[currentSong].src
     caption.textContent = songs[currentSong].caption.toUpperCase()
     artist_name.textContent = songs[currentSong].artist.toUpperCase()
     currentSongNumber(currentSong)
+    volume_of_song_percentage.textContent = volume_of_song.value + ' %'
   }
   start()
 
+  musicIcon.addEventListener('click', () => {
+    if (audioPlayer.paused) {
+      audioPlayer.play()
+    } else {
+      audioPlayer.pause()
+    }
+  })
+
+  // manipulate volume and time of song
+  volume_of_song.addEventListener('input', () => {
+    audioPlayer.volume = volume_of_song.value / 100
+    volume_of_song_percentage.textContent = volume_of_song.value + ' %'
+    if (volume_of_song.value === '0') {
+      volume_icon.setAttribute('class', '')
+      volume_icon.classList.add('fa-solid', 'fa-volume-xmark')
+    } else if (volume_of_song.value < '50') {
+      volume_icon.setAttribute('class', '')
+      volume_icon.classList.add('fa-solid', 'fa-volume-low')
+    } else {
+      volume_icon.setAttribute('class', '')
+      volume_icon.classList.add('fa-solid', 'fa-volume-high')
+    }
+  })
+  time_left_of_song.addEventListener('input', () => {
+    const percentage = time_left_of_song.value
+    const duration = audioPlayer.duration
+    const seekTime = (percentage / 100) * duration
+    audioPlayer.currentTime = seekTime
+  })
+  audioPlayer.addEventListener('timeupdate', () => {
+    const currentTime = audioPlayer.currentTime
+    const duration = audioPlayer.duration
+    const percentage = (currentTime / duration) * 100
+    time_left_of_song.value = percentage
+  })
+
+  // manipulate what to do when play or pause or end
   function musicPlay() {
     status.style.opacity = '1'
     musicIcon.style.animation = 'spin 4s linear infinite'
@@ -79,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
     audioPlayer.play()
   })
 
+  // manipulate when next or prev icon got action
   next_song.addEventListener('mouseover', () => {
     if (currentSong === songs.length - 1) {
       return (caption.textContent = `... ${songs[0].caption}`)
@@ -90,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })
   next_song.addEventListener('click', () => {
     musicIcon.style.animation = ''
-    musicPause()
+
     if (currentSong === songs.length - 1) {
       currentSong = -1
     }
@@ -100,7 +146,9 @@ document.addEventListener('DOMContentLoaded', function () {
     artist_name.textContent = songs[currentSong].artist.toUpperCase()
     if (playing) {
       audioPlayer.play()
+      return
     }
+    musicPause()
   })
 
   prev_song.addEventListener('mouseover', () => {
@@ -114,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })
   prev_song.addEventListener('click', () => {
     musicIcon.style.animation = ''
-    musicPause()
+
     if (currentSong === 0) {
       currentSong = songs.length
     }
@@ -124,9 +172,11 @@ document.addEventListener('DOMContentLoaded', function () {
     artist_name.textContent = songs[currentSong].artist.toUpperCase()
     if (playing) {
       audioPlayer.play()
+      return
     }
+    musicPause()
   })
-  // to add music with modal and form start
+  // to add music with modal start
   const addSongModal = document.querySelector('#addSongModal')
   const openAddSongModalBtn = document.querySelector('#openAddSongModalBtn')
   const closeAddSongModalBtn = document.querySelector('#closeAddSongModal')
@@ -158,36 +208,59 @@ document.addEventListener('DOMContentLoaded', function () {
     currentSong = songs.length - 1
     start()
   })
-  // to add music with modal and form end
-   // songList modal start
+  // to add music with modal end
+  // songList modal start
   const songListModal = document.querySelector('#songListModal')
   const closeSongListModal = document.querySelector('#closeSongListModal')
   const songList = document.querySelector('#songList')
 
   songList.addEventListener('click', (e) => {
-    currentSong = parseInt(e.target.id)
-    songListModal.style.display = 'none'
-    songList.innerHTML = ''
-    start()
-    if(playing){
-      audioPlayer.play();
+    let clickedElement = e.target
+
+    while (clickedElement && clickedElement.tagName !== 'LI') {
+      clickedElement = clickedElement.parentElement
+    }
+
+    if (clickedElement) {
+      currentSong = parseInt(clickedElement.id)
+      songListModal.style.display = 'none'
+      songList.innerHTML = ''
+      start()
+      if (playing) {
+        audioPlayer.play()
+      }
     }
   })
+
   current_song_no.addEventListener('click', () => {
     songListModal.style.display = 'block'
+
+    function createSong(i) {
+      const listItem = document.createElement('li')
+      listItem.id = i
+
+      const captionElement = document.createElement('span')
+      captionElement.textContent = songs[i].caption.toUpperCase()
+      listItem.appendChild(captionElement)
+
+      const artistElement = document.createElement('h6')
+      const microphoneIcon = document.createElement('i')
+      microphoneIcon.className = 'fa-solid fa-microphone-lines'
+      artistElement.appendChild(microphoneIcon)
+      artistElement.innerHTML += songs[i].artist.toUpperCase()
+      listItem.appendChild(artistElement)
+      return listItem
+    }
+
     for (let i = 0; i < songs.length; i++) {
-      songList.innerHTML += `<li id=${i}>
-        ${songs[
-          i
-        ].caption.toUpperCase()} <h6><i class="fa-solid fa-microphone-lines"></i>${songs[
-        i
-      ].artist.toUpperCase()}</h6>
-      </li>`
+      const song = createSong(i)
+      songList.appendChild(song)
     }
   })
+
   closeSongListModal.addEventListener('click', () => {
     songListModal.style.display = 'none'
     songList.innerHTML = ''
   })
-  // songList modal start
+  // songList modal end
 })
