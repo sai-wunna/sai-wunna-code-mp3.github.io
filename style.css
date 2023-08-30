@@ -14,9 +14,9 @@
 }
 
 .figure-container {
-  max-width: 300px;
+  width: 270px;
   padding: 10px;
-  border-radius: 30px;
+  border-radius: 20px;
   margin: 0 auto;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -49,17 +49,73 @@
 .artist_name {
   font-size: 15px;
 }
-
 .audio-player {
-  width: 300px;
+  width: 100%;
+}
+/* new insert of audio control panel start */
+/* Style the audio condition container */
+.audio-condition {
+  margin-bottom: 10px;
+  font-size: 15px;
 }
 
-.download-link {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
+.audio-condition-box {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  margin: auto;
 }
 
+#time_left_of_song {
+  width: 100%;
+  -webkit-appearance: none;
+  background: rgb(43, 90, 131);
+  border-radius: 5px;
+  height: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+#time_left_of_song::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  background: white;
+  cursor: pointer;
+}
+
+#volume_of_song {
+  width: 70%;
+  -webkit-appearance: none;
+  background: rgb(43, 90, 131);
+  border-radius: 5px;
+  height: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+#volume_of_song::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgb(43, 90, 131);
+  cursor: pointer;
+}
+
+#volume_of_song_percentage {
+  margin: auto;
+  color: rgb(43, 90, 131);
+}
+
+#volume_icon {
+  margin: auto;
+  color: rgb(43, 90, 131);
+}
+
+/* new start of audio control panel end */
 .message {
   display: flex;
   padding: 5px;
@@ -96,11 +152,12 @@
 }
 #music-icon {
   position: relative;
-  font-size: 33px;
+  font-size: 35px;
   border-radius: 10px;
   right: 0;
   padding: 2px 0px;
   color: rgb(24, 62, 95);
+  cursor: pointer;
 }
 .btn-group {
   margin: 5px;
@@ -188,7 +245,7 @@
   float: right;
   margin: 17px auto;
   margin-right: 10px;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   cursor: pointer;
   color: white;
@@ -206,7 +263,7 @@
   padding: 5px;
   padding-left: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 20px;
   background-color: #f9f9f9;
 }
 
