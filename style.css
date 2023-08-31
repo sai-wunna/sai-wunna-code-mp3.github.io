@@ -79,8 +79,12 @@
 #time_left_of_song::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
+  position: relative;
+  margin-top: -10px;
   width: 10px;
-  height: 10px;
+  border-radius: 5px;
+  height: 0px;
+  border-top: 7px solid rgb(43, 90, 131);
   background: white;
   cursor: pointer;
 }
