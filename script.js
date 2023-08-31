@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function musicPlay() {
     status.style.opacity = '1'
     musicIcon.style.animation = 'spin 4s linear infinite'
-    status.textContent = 'heart on beats'
+    status.textContent = 'Heart on Beats'
   }
   function musicPause() {
     musicIcon.style.animation = ''
