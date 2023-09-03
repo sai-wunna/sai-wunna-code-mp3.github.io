@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="compact-disc-solid.svg" type="image/x-icon">
     <link rel="stylesheet" href="./style.css" />
     <link
       rel="stylesheet"
@@ -13,7 +14,8 @@
     <div class="wrapper">
       <div class="figure-container">
         <div class="caption"></div>
-        <div class="artist">
+        <div class="artist_box">
+          <span id="favorite"></span>
           <i class="fa-solid fa-microphone-lines"></i>
           <span class="artist_name"></span>
         </div>
@@ -36,7 +38,7 @@
         </audio>
         <div class="audio-condition">
           <div class="audio-condition-box">
-            <input type="range" id="time_left_of_song" min="0" max="100" value="0"/>
+            <input type="range" id="time_left_of_song" min="0" max="100"/>
           </div>
           <div class="audio-condition-box">
             <input type="range" id="volume_of_song" min="0" max="100" value="50"/>
@@ -45,7 +47,7 @@
         </div>
         <div class="message">
           <i class="fas fa-compact-disc" id="music-icon"></i>
-          <div id="status" class="status">Frozen Heart !</div>
+          <span id="status" class="status">Frozen Heart !</span>
           <i class="fa-solid fa-plus" id="openAddSongModalBtn"></i>
         </div>
         <!-- // add song model start -->
@@ -54,13 +56,13 @@
             <span id="closeAddSongModal">&times;</span>
             <h3>Add Music</h3>
             <form id="addMusicForm">
-              <label for="caption">Caption:</label>
+              <label for="caption">Caption</label>
               <input type="text" id="caption" name="caption" required />
               <br />
-              <label for="artist">Artist:</label>
+              <label for="artist">Artist</label>
               <input type="text" id="artist" name="artist" required />
               <br />
-              <label for="audioFile">Audio File:</label>
+              <label for="audioFile" class="file_input">Click Here To Add Music File <i class="fa-solid fa-upload"></i></label>
               <input
                 type="file"
                 id="audioFile"
@@ -73,7 +75,6 @@
           </div>
         </div>
         <!-- // add song modal end  -->
-      </d>
       <script type="module" src="./script.js"></script>
     </div>
   </body>
