@@ -5,6 +5,10 @@
   /* font-size: 16px; */
 }
 
+.fa-heart {
+  color: rgb(43, 90, 131);
+}
+
 .wrapper {
   display: flex;
   justify-content: center;
