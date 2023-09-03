@@ -4,36 +4,40 @@ document.addEventListener('DOMContentLoaded', function () {
       caption: 'brazil',
       src: './song/Declan_McKenna_-_Brazil.mp3',
       artist: 'declan mckenna',
+      favorite: false,
     },
     {
       caption: 'perfect',
       src: './song/perfect-ed-sheeran.mp3',
       artist: 'ed sheeran',
+      favorite: false,
     },
     {
       caption: 'sign of the times',
       src: './song/sign-of-the-times-harry-styles.mp3',
       artist: 'harry styles',
+      favorite: false,
     },
     {
       caption: 'radio',
       src: './song/radio-lana-del-rey.mp3',
       artist: 'lana del rey',
+      favorite: false,
     },
     {
       caption: 'save your tears',
       src: './song/The_Weeknd_Save_Your_Tears.mp3',
       artist: 'the weeknd',
+      favorite: false,
     },
   ]
-  let currentSong = 0
-  let playing = false
 
   const audioPlayer = document.querySelector('#audio-player')
   const status = document.querySelector('.status')
   const musicIcon = document.querySelector('#music-icon')
   const next_song = document.querySelector('#next_song')
   const prev_song = document.querySelector('#prev_song')
+  const set_favorite = document.querySelector('#favorite')
   const artist_name = document.querySelector('.artist_name')
   const caption = document.querySelector('.caption')
   const current_song_no = document.querySelector('.current_song_no')
@@ -44,10 +48,29 @@ document.addEventListener('DOMContentLoaded', function () {
   )
   const volume_icon = document.querySelector('#volume_icon')
 
-  function currentSongNumber(number) {
+  let currentSong = 0
+  let playing = false
+
+  const currentSongNumber = (number) => {
     current_song_no.textContent = `${++number} / ${songs.length}`
   }
-  function start() {
+
+  const favoriteOrNot = (currentSong) => {
+    const child = document.querySelector('.fa-heart')
+    if (child) {
+      set_favorite.removeChild(child)
+    }
+    const i = document.createElement('i')
+    if (songs[currentSong].favorite) {
+      i.setAttribute('class', 'fa-solid fa-heart')
+      set_favorite.appendChild(i)
+    } else {
+      i.setAttribute('class', 'fa-regular fa-heart')
+      set_favorite.appendChild(i)
+    }
+  }
+
+  const start = () => {
     audioPlayer.volume = 0.5
     audioPlayer.src = songs[currentSong].src
     caption.textContent = songs[currentSong].caption.toUpperCase()
@@ -55,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
     currentSongNumber(currentSong)
     volume_of_song_percentage.textContent = volume_of_song.value + ' %'
     time_left_of_song.value = 0
+    favoriteOrNot(currentSong)
   }
   start()
 
@@ -64,6 +88,15 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       audioPlayer.pause()
     }
+  })
+
+  set_favorite.addEventListener('click', () => {
+    if (songs[currentSong].favorite) {
+      songs[currentSong].favorite = false
+    } else {
+      songs[currentSong].favorite = true
+    }
+    favoriteOrNot(currentSong)
   })
 
   // manipulate volume and time of song
@@ -97,12 +130,12 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 
   // manipulate what to do when play or pause or end
-  function musicPlay() {
+  const musicPlay = () => {
     status.style.opacity = '1'
     musicIcon.style.animation = 'spin 4s linear infinite'
     status.textContent = 'Heart on Beats'
   }
-  function musicPause() {
+  const musicPause = () => {
     musicIcon.style.animation = ''
     status.textContent = 'Frozen Heart !'
     status.style.opacity = '0.4'
@@ -147,6 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
     currentSongNumber(currentSong)
     caption.textContent = songs[currentSong].caption.toUpperCase()
     artist_name.textContent = songs[currentSong].artist.toUpperCase()
+    favoriteOrNot(currentSong)
     if (playing) {
       audioPlayer.play()
       return
@@ -173,6 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
     currentSongNumber(currentSong)
     caption.textContent = songs[currentSong].caption.toUpperCase()
     artist_name.textContent = songs[currentSong].artist.toUpperCase()
+    favoriteOrNot(currentSong)
     if (playing) {
       audioPlayer.play()
       return
@@ -238,19 +273,32 @@ document.addEventListener('DOMContentLoaded', function () {
   current_song_no.addEventListener('click', () => {
     songListModal.style.display = 'block'
 
-    function createSong(i) {
+    const createSong = (i) => {
       const listItem = document.createElement('li')
       listItem.id = i
 
       const captionElement = document.createElement('span')
-      captionElement.textContent = songs[i].caption.toUpperCase()
+      const icon = document.createElement('i')
+      if (songs[i].favorite) {
+        icon.setAttribute('class', 'fa-solid fa-heart')
+      } else {
+        icon.setAttribute('class', 'fa-regular fa-heart')
+      }
+      captionElement.appendChild(icon)
+      const captionText = document.createTextNode(
+        songs[i].caption.toUpperCase()
+      )
+      captionElement.appendChild(captionText)
       listItem.appendChild(captionElement)
 
-      const artistElement = document.createElement('h6')
+      const artistElement = document.createElement('div')
       const microphoneIcon = document.createElement('i')
       microphoneIcon.className = 'fa-solid fa-microphone-lines'
       artistElement.appendChild(microphoneIcon)
-      artistElement.innerHTML += songs[i].artist.toUpperCase()
+
+      const artistName = document.createTextNode(songs[i].artist.toUpperCase())
+      artistElement.appendChild(artistName)
+
       listItem.appendChild(artistElement)
       return listItem
     }
